@@ -9,8 +9,8 @@ function DarkMode() {
     let newTheme = theme === "light" ? "dark" : "light"
     setTheme(newTheme)
 
-    localStorage.setItem("theme", theme)
-    document.documentElement.setAttribute("data-user-color-scheme", theme)
+    localStorage.setItem("theme", newTheme)
+    document.documentElement.setAttribute("data-user-color-scheme", newTheme)
   }
 
   useEffect(() => {

@@ -1,22 +1,47 @@
-import React from "react"
+import React, { useState } from "react"
 import "../styles/App.css"
 
 import DarkMode from "../components/DarkMode"
 
-import "../data/human_names.json"
+import human_data from "../data/human_names.json"
 
 function App() {
+  const [names, setNames] = useState()
+
+  const getNames = (data, amount) => {
+    let nameList = []
+
+    for (let i = 0; i < amount; i++) {
+      let rand = Math.floor(Math.random() * data.length)
+      nameList.push(data[rand])
+    }
+
+    setNames(nameList)
+  }
+
   return (
     <div className="App">
       <div className="content">
         <h1 className="heading heavy primary">D&D Name Generator</h1>
-        <p className="normal secondary">
-          This website is created for the purpose of being a template for any
-          new react projects that I create. It will come with the font weights,
-          sizes, and colors, along with npm packages and folder organization
-          that I already use for most of my projects.
-        </p>
+        <div className="names">
+          <button onClick={() => getNames(human_data.human.male, 5)}>
+            Male Names
+          </button>
+          <button onClick={() => getNames(human_data.human.female, 5)}>
+            Female Names
+          </button>
 
+          <ul>
+            {names &&
+              names.map((name, i) => {
+                return (
+                  <li className="secondary normal" key={i}>
+                    {name}
+                  </li>
+                )
+              })}
+          </ul>
+        </div>
         <DarkMode />
       </div>
     </div>
